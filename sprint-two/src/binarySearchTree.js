@@ -3,6 +3,9 @@ var BinarySearchTree = function(value) {
   binarysearch.left = null;
   binarysearch.right = null;
   binarysearch.value = value;
+  binarysearch.BFS = [];
+  binarysearch.BFSLog = [];
+
   return binarysearch;
 };
 
@@ -30,7 +33,6 @@ bstMethods.insert = function (val) {
   }
 };
 bstMethods.contains = function(val) {
-  console.log(val);
   // Recursion
   // Base case: if this.value = val
   //   return true 
@@ -63,6 +65,23 @@ bstMethods.depthFirstLog = function(func) {
     return ( (this.left === null ? false : this.left.depthFirstLog(func)) || (this.right === null ? false : this.right.depthFirstLog(func) ) );
   }
 
+};
+
+bstMethods.breadthFirstLog = function (func) {
+  var queue = [], traversal, result = [];
+  queue.push(this);
+  while (queue.length > 0) {
+    traversal = queue[0];
+    console.log(traversal.left);
+    if (traversal.left !== null) {
+      queue.push(traversal.left);
+    }
+    if (traversal.right !== null) {
+      queue.push(traversal.right);
+    }
+    result.push(queue.shift().value);
+  }
+  return result.slice(1);
 };
 
 
